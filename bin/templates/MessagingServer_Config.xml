@@ -1,0 +1,3 @@
+<Root>
+  <Config ${single default_user_server="http://127.0.0.1:8002/"|string}$ user_send_key="null" user_recv_key="null" ${single default_grid_server="http://127.0.0.1:8003/"|string}$ grid_send_key="null" grid_recv_key="null" ${single database_connect="Data Source=localhost;Database=grid;User ID=root;Password=root;"|string}$ ${choice database_provider={"OpenSim.Data.MySQL.dll", "OpenSim.Data.SQLite.dll", "OpenSim.Data.MSSQL.dll", "OpenSim.Data.Null.dll"}|string}$ region_comms_provider="OpenSim.Region.Communications.OGS1.dll" ${single http_port="8006"|string}$ http_ssl="False" ${single published_ip="127.0.0.1"|string}$ console_user="" console_pass="" />
+</Root>

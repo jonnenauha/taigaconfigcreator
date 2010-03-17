@@ -1,0 +1,4 @@
+<Root>
+  <Config ${single default_startup_message="Welcome to OGS"|string}$ 
+  ${single default_grid_server="http://127.0.0.1:8003/"|string}$ grid_send_key="null" grid_recv_key="null" ${single default_inventory_server="http://127.0.0.1:8003/"|string}$ ${single default_authentication_server="http://localhost:8002/"|string}$ library_location=".\inventory\Libraries.xml" ${choice database_provider={"OpenSim.Data.MySQL.dll", "OpenSim.Data.SQLite.dll", "OpenSim.Data.MSSQL.dll", "OpenSim.Data.Null.dll"}|string} ${single database_connect="Data Source=localhost;Database=grid;User ID=root;Password=root;"|string}$ ${single http_port="8002"|string}$ http_ssl="False" ${single default_X="1000"|string}$ ${single default_Y="1000"|string} enable_llsd_login="True" enable_hg_login="True" default_loginLevel="0" console_user="" console_pass="" content_file_path="" facebook_app_key="" facebook_app_secret="" />
+</Root>
