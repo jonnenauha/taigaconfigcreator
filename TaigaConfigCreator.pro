@@ -13,11 +13,13 @@ DESTDIR = bin
 SOURCES += main.cpp\
         MainWindow.cpp \
     UiHelper.cpp \
-    TemplateReader.cpp
+    TemplateReader.cpp \
+    ConfigContent.cpp
 
 HEADERS  += MainWindow.h \
     UiHelper.h \
-    TemplateReader.h
+    TemplateReader.h \
+    ConfigContent.h
 
 FORMS    += MainWindow.ui
 

@@ -17,52 +17,46 @@ TemplateReader::TemplateReader(QObject *parent) :
 
 void TemplateReader::ReadAllTemplates()
 {
-    foreach (QString template_filename, template_files_)
+    QString TAG_START  = "${",
+            TAG_FINISH = "}$";
+
+    foreach (QString filename, template_files_)
     {
-        qDebug() << "Parsing file: " << template_filename;
-
-        // Open the file
-        QFile template_file(template_filename);
-        if (!template_file.exists())
+        QFile *file = OpenFile(filename);
+        if (!file)
             continue;
-        if (!template_file.open(QIODevice::ReadOnly|QIODevice::Text))
-            continue;
+        QByteArray content = file->readAll();
+        file->close();
 
-        // Loop for tags and store them
-        QByteArray file_content = template_file.readAll();
-        int tag_start = -2;
-        int tag_end = 0;
+        QStringList found_tags;
+        int index_start = 0;
+        int index_finish = 0;
+
         while (true)
         {
-            tag_start = file_content.indexOf("${", tag_start+2);
-            tag_end = file_content.indexOf("}$", tag_start+2);
+            index_start = content.indexOf(TAG_START, index_start);
+            index_finish = content.indexOf(TAG_FINISH, index_start + TAG_START.length());
 
-            if (tag_start == -1 || tag_end == -1)
+            if (index_start != -1 && index_finish != -1)
+            {
+                index_start += TAG_START.length();
+                index_finish -= index_start;
+                found_tags.append(content.mid(index_start, index_finish));
+            }
+            else
                 break;
-
-            qDebug() << "   " << file_content.mid(tag_start+2, tag_end-tag_start-2);
         }
 
-        // Create qwidget with data and StoreWidgetToMap(template_filename, widget)
-        qDebug() << endl;
+        configs_.append(new ConfigContent(this, filename, found_tags));
     }
 }
 
-void TemplateReader::StoreWidgetToMap(QString template_name, QWidget *tab_widget)
+QFile *TemplateReader::OpenFile(QString filename)
 {
-    QString tab_name = "";
-    if (template_name.endsWith("OpenSim.ini"))
-       tab_name = "opensim";
-    else if (template_name.endsWith("Opensim.Server.ini"))
-        tab_name = "robust";
-    else if (template_name.endsWith("Regions.ini"))
-        tab_name = "region";
-    else if (template_name.endsWith("MessagingServer_Config.xml"))
-        tab_name = "messaging";
-    else if (template_name.endsWith("UserServer_Config.xml"))
-        tab_name = "user";
-    else if (template_name.endsWith("modrex.ini"))
-        tab_name = "modrex";
-    if (!tab_name.isEmpty())
-         tab_to_widget_map_[tab_name] = tab_widget;
+    QFile *file = new QFile(filename);
+    if (!file->exists())
+        return 0;
+    if (!file->open(QIODevice::ReadOnly|QIODevice::Text))
+        return 0;
+    return file;
 }

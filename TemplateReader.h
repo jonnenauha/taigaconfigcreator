@@ -1,10 +1,13 @@
 #ifndef TEMPLATEREADER_H
 #define TEMPLATEREADER_H
 
+#include "ConfigContent.h"
+
 #include <QObject>
 #include <QStringList>
 #include <QMap>
 #include <QWidget>
+#include <QFile>
 
 class TemplateReader : public QObject
 {
@@ -18,13 +21,12 @@ public slots:
     void ReadAllTemplates();
 
 private slots:
-    void StoreWidgetToMap(QString template_name, QWidget *tab_widget);
+    QFile *OpenFile(QString filename);
 
 private:
     QString template_location_;
     QStringList template_files_;
-
-    QMap<QString, QWidget*> tab_to_widget_map_;
+    QList<ConfigContent *> configs_;
 };
 
 #endif // TEMPLATEREADER_H
