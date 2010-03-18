@@ -11,8 +11,15 @@ TEMPLATE = app
 DESTDIR = bin
 
 SOURCES += main.cpp\
-        MainWindow.cpp
+        MainWindow.cpp \
+    UiHelper.cpp \
+    TemplateReader.cpp
 
-HEADERS  += MainWindow.h
+HEADERS  += MainWindow.h \
+    UiHelper.h \
+    TemplateReader.h
 
 FORMS    += MainWindow.ui
+
+RESOURCES += \
+    resources.qrc

@@ -2,15 +2,27 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+
+#include "UiHelper.h"
+#include "TemplateReader.h"
+
 #include "ui_MainWindow.h"
 
-class MainWindow : public QMainWindow, private Ui::MainWindow
+class MainWindow : public QMainWindow, public Ui::MainWindow
 {
 
 Q_OBJECT
 
 public:
-    explicit MainWindow();
+    MainWindow();
+
+private slots:
+    void InitUi();
+    void ConnectSignals();
+
+private:
+    UiHelper *ui_helper_;
+    TemplateReader *template_reader_;
 
 };
 
