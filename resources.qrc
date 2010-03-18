@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/images">
+        <file alias="title.png">ui/title.png</file>
+    </qresource>
+</RCC>
