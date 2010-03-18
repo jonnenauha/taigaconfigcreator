@@ -2,8 +2,6 @@
 TAIGA CONFIG CREATOR
 ====================
 This software was developed by Jonne Nauha (jonne.nauha@evocatici.com).
-Check Qt licence from LICENCE.txt as of rest of this software you are free to use it in any way, shape or form.
-
 Don't modify the files in templates folder or the parsing and creating of config files with your settings might fail.
 
 TEMPLATE CONFIGS TAG DESCRIPTION
